@@ -133,8 +133,8 @@ ax.set_ylabel('Mean')
 ax.set_title('Pengaruh TEMP, WSPM, PRES, & DEWP')
 ax.set_xticks(x + width)
 ax.set_xticklabels(species)
-ax.legend(loc='upper left', ncols=4)
 ax.set_ylim(-2, 3000)
+ax.legend(loc='upper left', ncols=4)
 
 st.pyplot(fig)
 
