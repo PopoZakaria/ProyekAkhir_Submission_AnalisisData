@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+import traceback
 
 
 #menyiapkan helper function untuk dataframe
@@ -187,21 +188,25 @@ st.subheader("Air Quality Index by variable time")
 
 col1, col2, col3, col4= st.columns(4)
 
-with col1:
-    max_year = time_df.groupby(by= "column_year").index_aqi.sum().idxmax()
-    st.metric("Best Year", value=max_year)
+try:
+    with col1:
+        max_year = time_df.groupby(by="column_year").index_aqi.sum().idxmax()
+        st.metric("Best Year", value=max_year)
 
-with col2:
-    max_month= time_df.groupby(by= "column_month").index_aqi.sum().idxmax()
-    st.metric("Best Month", value=max_month)
+    with col2:
+        max_month = time_df.groupby(by="column_month").index_aqi.sum().idxmax()
+        st.metric("Best Month", value=max_month)
 
-with col3:
-    max_day = time_df.groupby(by= "column_day").index_aqi.sum().idxmax()
-    st.metric("Best Day", value=max_day)
+    with col3:
+        max_day = time_df.groupby(by="column_day").index_aqi.sum().idxmax()
+        st.metric("Best Day", value=max_day)
 
-with col4:
-    max_hour = time_df.groupby(by= "column_hour").index_aqi.sum().idxmax()
-    st.metric("Best Hour", value=max_hour)
+    with col4:
+        max_hour = time_df.groupby(by="column_hour").index_aqi.sum().idxmax()
+        st.metric("Best Hour", value=max_hour)
+except Exception as e:
+    st.error(f"An error occurred: {e}")
+    st.write(traceback.format_exc()) 
 
 cat_var=["column_year", "column_month", "column_day", "column_hour"] #membuat list untuk label attribute visualisasi
 
