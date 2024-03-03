@@ -135,7 +135,7 @@ ax.set_title('Pengaruh SO2, NO2, CO, & O3')
 ax.set_xticks(x + width)
 ax.set_xticklabels(species)
 ax.set_ylim(-2, 3000)
-# ax.legend(loc='upper left', ncols=4)
+ax.legend(loc='upper right')
 
 st.pyplot(fig)
 
@@ -181,6 +181,7 @@ ax.set_title('Pengaruh TEMP, PRES, DEWP, & WSPM')
 ax.set_xticks(x + width)
 ax.set_xticklabels(species)
 ax.set_ylim(-2, 1400)
+ax.legend(loc='upper right')
 
 st.pyplot(fig)
 
@@ -191,19 +192,19 @@ col1, col2, col3, col4= st.columns(4)
 try:
     with col1:
         max_year = time_df.groupby(by="column_year").index_aqi.sum().idxmax()
-        st.metric("Best Year", value=max_year)
+        st.metric("Best Year", value=float(max_year))
 
     with col2:
         max_month = time_df.groupby(by="column_month").index_aqi.sum().idxmax()
-        st.metric("Best Month", value=max_month)
+        st.metric("Best Month", value=float(max_month))
 
     with col3:
         max_day = time_df.groupby(by="column_day").index_aqi.sum().idxmax()
-        st.metric("Best Day", value=max_day)
+        st.metric("Best Day", value=float(max_day))
 
     with col4:
         max_hour = time_df.groupby(by="column_hour").index_aqi.sum().idxmax()
-        st.metric("Best Hour", value=max_hour)
+        st.metric("Best Hour", value=float(max_hour))
 except Exception as e:
     st.error(f"An error occurred: {e}")
     st.write(traceback.format_exc()) 
