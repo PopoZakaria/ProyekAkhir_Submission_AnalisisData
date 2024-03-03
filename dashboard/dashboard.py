@@ -191,19 +191,19 @@ col1, col2, col3, col4= st.columns(4)
 
 with col1:
     mean_year = round(time_df.column_year.mean(), 2)
-    st.metric("average year", value=float(mean_year))
+    st.metric("average year", value=(mean_year))
 
 with col2:
     mean_month = round(time_df.column_month.mean(), 2)
-    st.metric("average month", value=float(mean_month))
+    st.metric("average month", value=(mean_month))
 
 with col3:
     mean_day = round(time_df.column_day.mean(), 2)
-    st.metric("average day", value=float(mean_day))
+    st.metric("average day", value=(mean_day))
 
 with col4:
     mean_hour = round(time_df.column_hour.mean(), 2)
-    st.metric("average hour", value=float(mean_hour))
+    st.metric("average hour", value=(mean_hour))
 
 cat_var=["column_year", "column_month", "column_day", "column_hour"] #membuat list untuk label attribute visualisasi
 
