@@ -187,40 +187,35 @@ st.subheader("Air Quality Index by variable time")
 
 col1, col2, col3, col4= st.columns(4)
 
-with col1:
-    max_year = time_df.groupby(by= "column_year").index_aqi.sum()
-    st.metric(label="Best Year", value=max_year)
+# Calculate the sum of index_aqi for each year, month, day, and hour
+max_year = time_df.groupby("column_year")["index_aqi"].sum().idxmax()
+max_month = time_df.groupby("column_month")["index_aqi"].sum().idxmax()
+max_day = time_df.groupby("column_day")["index_aqi"].sum().idxmax()
+max_hour = time_df.groupby("column_hour")["index_aqi"].sum().idxmax()
 
-with col2:
-    max_month= time_df.groupby(by= "column_month").index_aqi.sum()
-    st.metric(label="Best Month", value=max_month)
+# Now create metrics using the correct values
+st.metric(label="Best Year", value=max_year)
+st.metric(label="Best Month", value=max_month)
+st.metric(label="Best Day", value=max_day)
+st.metric(label="Best Hour", value=max_hour)
 
-with col3:
-    max_day = time_df.groupby(by= "column_day").index_aqi.sum()
-    st.metric(label="Best Day", value=max_day)
-
-with col4:
-    max_hour = time_df.groupby(by= "column_hour").index_aqi.sum()
-    st.metric(label="Best Hour", value=max_hour)
-
-cat_var=["column_year", "column_month", "column_day", "column_hour"] #membuat list untuk label attribute visualisasi
+cat_var = ["column_year", "column_month", "column_day", "column_hour"]
 
 # Membuat subplot grid
-fig, ax= plt.subplots(nrows= 2, ncols= int(len(cat_var)/2), figsize= (50,15))
+fig, ax = plt.subplots(nrows=2, ncols=int(len(cat_var)/2), figsize=(50, 15))
 
 # Looping untuk mengisi subplot grid dengan plots
-k= 0
+k = 0
 for i in range(2):
     for j in range(int(len(cat_var)/2)):
-        sns.barplot(y= time_df.groupby(by= cat_var[k]).index_aqi.sum(),
-                    x= time_df.groupby(by= cat_var[k]).mean(numeric_only=True).index, ax= ax[i,j], palette= 'winter')
+        sns.barplot(y=time_df.groupby(by=cat_var[k])["index_aqi"].sum(),
+                    x=time_df.groupby(by=cat_var[k]).mean(numeric_only=True).index, ax=ax[i, j], palette='winter')
 
-        ax[i,j].set_title(f'{cat_var[k].upper()}', fontsize= 30)
-        ax[i,j].set_ylabel('')
-        ax[i,j].set_xlabel('')
-        ax[i,j].tick_params(axis='y', labelsize=30)
-        ax[i,j].tick_params(axis='x', labelsize=25)
+        ax[i, j].set_title(f'{cat_var[k].upper()}', fontsize=30)
+        ax[i, j].set_ylabel('')
+        ax[i, j].set_xlabel('')
+        ax[i, j].tick_params(axis='y', labelsize=30)
+        ax[i, j].tick_params(axis='x', labelsize=25)
         plt.xticks(rotation=315)
-        k+=1
-
+        k += 1
 st.pyplot(fig)
