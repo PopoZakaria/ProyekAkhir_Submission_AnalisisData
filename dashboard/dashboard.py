@@ -131,7 +131,8 @@ for attribute, measurement in quality_mean_df.items():
 # Menambah text, title,& label
 ax.set_ylabel('Mean')
 ax.set_title('Pengaruh TEMP, WSPM, PRES, & DEWP')
-ax.set_xticks(x + width, species)
+ax.set_xticks(x + width)
+ax.set_xticklabels(species)
 ax.legend(loc='upper left', ncols=4)
 ax.set_ylim(-2, 3000)
 
