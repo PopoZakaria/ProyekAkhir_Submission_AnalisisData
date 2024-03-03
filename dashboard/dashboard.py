@@ -144,19 +144,19 @@ col1, col2, col3, col4= st.columns(4)
 
 with col1:
     mean_temp = round(Viklim_mean_df.T.column_TEMP.mean(), 2)
-    st.metric("average TEMP", value=mean_temp)
+    st.metric("average TEMP", value=float(mean_temp))
 
 with col2:
     mean_pres = round(Viklim_mean_df.T.column_PRES.mean(), 2)
-    st.metric("average PRES", value=mean_pres)
+    st.metric("average PRES", value=float(mean_pres))
 
 with col3:
     mean_dewp = round(Viklim_mean_df.T.column_DEWP.mean(), 2)
-    st.metric("average DEWP", value=mean_dewp)
+    st.metric("average DEWP", value=float(mean_dewp))
 
 with col4:
     mean_wspm = round(Viklim_mean_df.T.column_WSPM.mean(), 2)
-    st.metric("average WSPM", value=mean_wspm)
+    st.metric("average WSPM", value=float(mean_wspm))
 
 species = ("TEMP", "PRES", "DEWP", "WSPM") 
 
