@@ -36,7 +36,7 @@ def create_df_time(df):
     return df_time
 
 #menyiapkan dataset
-df_aqi=pd.read_csv("./dashboard/df_AQI.csv")
+df_aqi=pd.read_csv("./dashboard/df_aqi.csv")
 df_aqi.sort_values(by="column_datetime")
 df_aqi.reset_index(inplace=True)
 df_aqi["column_datetime"]=pd.to_datetime(df_aqi["column_datetime"])
@@ -205,21 +205,24 @@ with col4:
     max_hour = time_df.groupby(by= "column_hour").index_aqi.sum().idxmax()
     st.metric("Best Hour", value=max_hour)
 
-cat_var = ['column_year', 'column_month', 'column_day', 'column_hour'] #membuat list untuk label attribute visualisasi
+cat_var=["column_year", "column_month", "column_day", "column_hour"] #membuat list untuk label attribute visualisasi
 
 # Membuat subplot grid
-fig, ax = plt.subplots(nrows=2, ncols=int(len(cat_var)/2), figsize=(25, 9))
+fig, ax= plt.subplots(nrows= 2, ncols= int(len(cat_var)/2), figsize= (50,15))
 
 # Looping untuk mengisi subplot grid dengan plots
-k = 0
+k= 0
 for i in range(2):
     for j in range(int(len(cat_var)/2)):
-        sns.barplot(x=df_aqi.groupby(by=cat_var[k]).index_aqi.sum(),
-                    y=df_aqi.groupby(by=cat_var[k]).mean(numeric_only=True).index, ax=ax[i, j], palette='winter')
+        sns.barplot(y= time_df.groupby(by= cat_var[k]).index_aqi.sum(),
+                    x= time_df.groupby(by= cat_var[k]).mean(numeric_only=True).index, ax= ax[i,j], palette= 'winter')
 
-        ax[i, j].set_title(f'{cat_var[k].upper()}', fontsize=15)
-        ax[i, j].set_ylabel('')
-        ax[i, j].set_xlabel('')
-        k += 1
+        ax[i,j].set_title(f'{cat_var[k].upper()}', fontsize= 30)
+        ax[i,j].set_ylabel('')
+        ax[i,j].set_xlabel('')
+        ax[i,j].tick_params(axis='y', labelsize=30)
+        ax[i,j].tick_params(axis='x', labelsize=25)
+        plt.xticks(rotation=315)
+        k+=1
 
 st.pyplot(fig)
