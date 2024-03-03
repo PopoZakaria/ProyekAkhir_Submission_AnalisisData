@@ -93,45 +93,52 @@ ax[1].set_title("Worst Air Quality Index (aqi)", loc="center", fontsize=30)
 ax[1].tick_params(axis='y', labelsize=20)
 ax[1].tick_params(axis ='x', labelsize=20)
 
+# Display the Matplotlib figure
 st.pyplot(fig)
 
+# Display the average variables
 st.subheader("Average variable SO2, NO2, CO, & O3")
 
+# Define columns for metrics
 col1, col2, col3, col4 = st.columns(4)
 
+# Calculate and display average values
 with col1:
-    mean_so2 = round(quality_mean_df.T.column_SO2.mean(), 2)
+    mean_so2 = round(quality_mean_df['column_SO2'].mean(), 2)
     st.metric("average SO2", value=float(mean_so2))
+
 with col2:
-    mean_no2 = round(quality_mean_df.T.column_NO2.mean(), 2)
+    mean_no2 = round(quality_mean_df['column_NO2'].mean(), 2)
     st.metric("average NO2", value=float(mean_no2))
+
 with col3:
-    mean_co = round(quality_mean_df.T.column_CO.mean(), 2)
+    mean_co = round(quality_mean_df['column_CO'].mean(), 2)
     st.metric("average CO", value=float(mean_co))
+
 with col4:
-    mean_o3 = round(quality_mean_df.T.column_O3.mean(), 2)
+    mean_o3 = round(quality_mean_df['column_O3'].mean(), 2)
     st.metric("average O3", value=float(mean_o3))
 
+# Prepare data for bar chart
 species = ("SO2", "NO2", "CO", "O3")
-
-#mengatur posisi, lebar, & jarak setiap bar
 x = np.arange(len(species))
 width = 0.25
 multiplier = 1
 
-fig, ax = plt.subplots(figsize=(12, 9)) #membuat subplot grid
+# Create the bar chart
+fig, ax = plt.subplots(figsize=(12, 9))
 
-#looping untuk mengisi subplot grid dengan plots
+# Loop to plot each attribute
 for attribute, measurement in quality_mean_df.items():
     offset = width * multiplier
     rects = ax.bar(x + offset, measurement, width, label=attribute)
     ax.bar_label(rects, padding=4, rotation=60)
     multiplier += 1
 
-# Menambah text, title,& label
+# Set axis labels, title, ticks, and legend
 ax.set_ylabel('Mean')
-ax.set_title('Pengaruh TEMP, WSPM, PRES, & DEWP')
-ax.set_xticks(x + width)
+ax.set_title('Pengaruh SO2, NO2, CO, & O3')
+ax.set_xticks(x + width * 1.5)
 ax.set_xticklabels(species)
 ax.set_ylim(-2, 3000)
 ax.legend(loc='upper left', ncols=4)
