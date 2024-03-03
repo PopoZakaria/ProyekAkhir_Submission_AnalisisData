@@ -189,25 +189,21 @@ st.subheader("Air Quality Index by variable time")
 
 col1, col2, col3, col4= st.columns(4)
 
-try:
-    with col1:
-        max_year = time_df.groupby(by="column_year").index_aqi.sum().idxmax()
-        st.metric("Best Year", value=float(max_year))
+with col1:
+    mean_year = round(time_df.column_year.mean(), 2)
+    st.metric("average year", value=float(mean_year))
 
-    with col2:
-        max_month = time_df.groupby(by="column_month").index_aqi.sum().idxmax()
-        st.metric("Best Month", value=float(max_month))
+with col2:
+    mean_month = round(time_df.column_month.mean(), 2)
+    st.metric("average month", value=float(mean_month))
 
-    with col3:
-        max_day = time_df.groupby(by="column_day").index_aqi.sum().idxmax()
-        st.metric("Best Day", value=float(max_day))
+with col3:
+    mean_day = round(time_df.column_day.mean(), 2)
+    st.metric("average day", value=float(mean_day))
 
-    with col4:
-        max_hour = time_df.groupby(by="column_hour").index_aqi.sum().idxmax()
-        st.metric("Best Hour", value=float(max_hour))
-except Exception as e:
-    st.error(f"An error occurred: {e}")
-    st.write(traceback.format_exc()) 
+with col4:
+    mean_hour = round(time_df.column_hour.mean(), 2)
+    st.metric("average hour", value=float(mean_hour))
 
 cat_var=["column_year", "column_month", "column_day", "column_hour"] #membuat list untuk label attribute visualisasi
 
