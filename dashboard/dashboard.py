@@ -101,17 +101,16 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     mean_so2 = round(quality_mean_df.T.column_SO2.mean(), 2)
-    st.metric("average SO2", value=mean_so2)
+    st.metric("average SO2", value=float(mean_so2))
 with col2:
     mean_no2 = round(quality_mean_df.T.column_NO2.mean(), 2)
-    st.metric("average NO2", value=mean_no2)
+    st.metric("average NO2", value=float(mean_no2))
 with col3:
     mean_co = round(quality_mean_df.T.column_CO.mean(), 2)
-    st.metric("average CO", value=mean_co)
+    st.metric("average CO", value=float(mean_co))
 with col4:
     mean_o3 = round(quality_mean_df.T.column_O3.mean(), 2)
-    st.metric("average O3", value=mean_o3)
-
+    st.metric("average O3", value=float(mean_o3))
 
 species = ("SO2", "NO2", "CO", "O3")
 
