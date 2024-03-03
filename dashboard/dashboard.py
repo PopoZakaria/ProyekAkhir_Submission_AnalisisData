@@ -34,7 +34,7 @@ def create_df_time(df):
     return df_time
 
 #menyiapkan dataset
-df_aqi=pd.read_csv("./dashboard/df_aqi.csv")
+df_aqi=pd.read_csv("./dashboard/df_AQI.csv")
 df_aqi.sort_values(by="column_datetime")
 df_aqi.reset_index(inplace=True)
 df_aqi["column_datetime"]=pd.to_datetime(df_aqi["column_datetime"])
