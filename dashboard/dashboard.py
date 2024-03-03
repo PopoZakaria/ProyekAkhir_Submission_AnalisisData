@@ -3,8 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-import traceback
-
 
 #menyiapkan helper function untuk dataframe
 def create_area_df(df):
