@@ -134,6 +134,7 @@ ax.set_title('Pengaruh SO2, NO2, CO, & O3')
 ax.set_xticks(x + width)
 ax.set_xticklabels(species)
 ax.set_ylim(-2, 3000)
+# ax.legend(loc='upper left', ncols=4)
 
 st.pyplot(fig)
 
