@@ -120,7 +120,7 @@ x = np.arange(len(species))
 width = 0.25
 multiplier = 1
 
-fig, ax = plt.subplots(layout='constrained') #membuat subplot grid
+fig, ax = plt.subplots(figsize=(12, 9)) #membuat subplot grid
 
 #looping untuk mengisi subplot grid dengan plots
 for attribute, measurement in quality_mean_df.items():
@@ -165,7 +165,7 @@ x = np.arange(len(species))
 width = 0.25
 multiplier = 1
 
-fig, ax = plt.subplots(layout='constrained') #membuat subplot grid
+fig, ax = plt.subplots(figsize=(12, 9)) #membuat subplot grid
 
 #looping untuk mengisi subplot grid dengan plots
 for attribute, measurement in Viklim_mean_df.items():
